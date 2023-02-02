@@ -13,4 +13,4 @@ A tab delimited data file containing the input file with the genomic coordinates
 
 ## Exemple
 
-Rscript call_regions.R input_file.txt output_file.txt 4,5,6 7,8,9
+`Rscript call_regions.R input_file.txt output_file.txt 4,5,6 7,8,9`
