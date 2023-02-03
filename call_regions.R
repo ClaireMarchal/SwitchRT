@@ -8,7 +8,7 @@ if (length(args)!=4) {
 
 source("SwitchRT.R")
 
-EL<-read.table(args[1],header=FALSE)
+EL<-read.table(args[1],header=TRUE)
 set1=as.numeric(strsplit(args[3],",")[[1]])
 set2=as.numeric(strsplit(args[4],",")[[1]])
 
