@@ -15,6 +15,6 @@ set2=as.numeric(strsplit(args[4],",")[[1]])
 DRs = getDistances(EL, set1, set2)
 DRs = getPvalues(DRs)
 DRs = getQvalues(DRs)
-DRs<-data.frame(na.omit(df[,c(1,2,3,set1,set2)]),as.data.frame(DRs))
+DRs<-data.frame(na.omit(EL[,c(1,2,3,set1,set2)]),as.data.frame(DRs))
 write.table(DRs,args[2],quote=F,sep="\t",row.names=F)
 
