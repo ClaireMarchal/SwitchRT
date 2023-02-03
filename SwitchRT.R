@@ -1,6 +1,6 @@
-require("foreign")
-require("fields")
-require("qvalue")
+require("foreign",quietly=TRUE)
+require("fields",quietly=TRUE)
+require("qvalue",quietly=TRUE)
 
 
 ##################################################

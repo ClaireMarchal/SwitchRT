@@ -1,6 +1,9 @@
 # SwitchRT
 R script for repli-seq data to assess replication timing (RT) changes between two conditions with mulitple replicate. For each genomic location, the q-value can be used to call which genomic regions have a RT significantly different between the two conditions (recommanded q-value threshold: 0.01).
 
+## Dependendy
+SwitchRT needs field, foreign and qvalue packages installed. To install them run in R:
+`BiocManager::install(c("foreign","fields","qvalue"))`
 
 ## Input
 - A tab delimited data file with header, containing the RT values from two or more conditions, with multiple replicates per condition, with each row correspond to a genomic location, the first 3 columns are the chromosome, start and stop positions for the genomic location, and each suplementary column are RT values from one sample.
