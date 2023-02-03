@@ -12,7 +12,7 @@ EL<-read.table(args[1],header=FALSE)
 set1=as.numeric(strsplit(args[3],",")[[1]])
 set2=as.numeric(strsplit(args[4],",")[[1]])
 
-DRs = getDistances(RT, set1, set2)
+DRs = getDistances(EL, set1, set2)
 DRs = getPvalues(DRs)
 DRs = getQvalues(DRs)
 DRs<-data.frame(na.omit(df[,c(1,2,3,set1,set2)]),as.data.frame(DRs))
