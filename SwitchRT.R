@@ -15,13 +15,15 @@ getDistances = function(RT, set1, set2) {
   R1test = as.matrix(R1)
   R2test = as.matrix(R2)
   datNum  = nrow(R1)
-  compMat = matrix(1:(datNum*datNum), nrow=datNum, ncol=datNum)		
+  compMat = matrix(1:(datNum*datNum), nrow=datNum, ncol=datNum)
+  diag(compMat)<-NA ## Added by Claire to avoid removing 0s in within matrix (remove only diag, not 0s due to identical values for the replicates)
   set1Ind = 1:length(set1)
   set2Ind = (max(set1Ind)+1) : (length(set2)+length(set1))
   LCTa = compMat[set1Ind,set1Ind]						# LCT, fingerprint set
   LCTb = compMat[set2Ind,set2Ind]						# LCT, non-fingerprint set
   DCT = c(compMat[set1Ind,set2Ind], compMat[set2Ind,set1Ind])		# DCT (combined)
-  LCT = sort(c(LCTa, LCTb))						# LCT, fingerprint vs. fingerprint, non vs. non
+  #LCT = sort(c(LCTa, LCTb))						# LCT, fingerprint vs. fingerprint, non vs. non
+  LCT = na.omit(sort(c(LCTa, LCTb)))      # LCT, fingerprint vs. fingerprint, non vs. non ## Added by Claire to avoid removing 0s in within matrix (remove only diag, not 0s due to identical values for the replicates)
   DCT = sort(DCT)								# DCT, fingerprint vs. non-fingerprint comparisons
   require(foreign)							# For rdist matrix euclidean distance
   require(fields)	    
@@ -33,7 +35,7 @@ getDistances = function(RT, set1, set2) {
   for(p in 1:reg) {	
     Distances = rdist(R1test[,p],R2test[,p])			# Distances among sets
     within  = Distances[c(LCT)]					# Distances within set1, set2
-    within  = within[within > 0.0001]				# Remove diagonal 0s
+#    within  = within[within > 0.0001]				# Remove diagonal 0s ## Modified by Claire to avoid removing 0s in within matrix (remove only diag, not 0s due to identical values for the replicates)
     between = Distances[c(DCT)]					# Distances between set1, set2
     DRs$local.p.value[p] = t.test(between, within, alternative="greater")$p.value	# P-value for current set agains individual probe/region/gene
     DRs$within[p]	= mean(within)					# Average distances within set1, set2 
